@@ -13,13 +13,17 @@
 
 #pdfcontent {
   // transform: scale(.9);
-  $small: 0.8rem;
-  $base: 1rem;
-  $medium: 1rem;
+  $small: 12.8px;
+  $base: 16px;
 
+  font-family: Helvetica !important;
+
+  * {
+    font-family: inherit;
+  }
 
   #header {
-    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+    padding: 8px 8px 4px 8px;
     border: solid 3px black;
     justify-content: stretch;
     #logo {
@@ -34,15 +38,22 @@
     #companyInformation {
       width: 40%;
       #companyName {
-        font-size: 1.2rem;
+        font-size: $base * 1.2;
         font-weight: bold;
       }
       #cnpj {
         font-size: $base;
       }
       #telefone {
-        margin: 0.5rem 0;
-        font-size: 1.05rem;
+        margin: 8px 0;
+        font-size: $base * 1.05;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        img {
+          height: 16px;
+          width: 16px;
+        }
       }
       #address {
         font-size: $base;
@@ -56,8 +67,8 @@
       display: inline-flex;
       min-width: 125px;
       border: solid 3px;
-      padding: 0.25rem 0.5rem;
-      gap: 0.5rem;
+      padding: 4px 8px;
+      gap: 8px;
       align-items: baseline;
       justify-content: flex-start;
       font-weight: bold;
@@ -65,7 +76,7 @@
   }
 
   #mainTitle {
-    font-size: 1.3rem;
+    font-size: 21px;
     letter-spacing: 0.5px;
     text-align: center;
     border: solid 3px black;
@@ -78,7 +89,7 @@
       border: solid 3px black;
       border-top: none; border-bottom-width: 2px;
       td {
-        padding: 0.25rem 0.5rem;
+        padding: 4px 8px;
         border: solid 1px black;
         font-weight: bold;
         small {
@@ -91,27 +102,21 @@
       }
 
       .vertical-text {
-        padding: 0.25rem;
-        font-size: 0.6rem;
+        padding: 0;
+        font-size: $small / 1.5;
         font-weight: normal;
         width: 25px;
-        writing-mode: vertical-lr;
-        text-orientation: upright;
-
       }
     }
   }
   #passengersTable {
-    tr td:first-child {
-      font-size: 0.9rem;
-    }
     td {
       text-align: center;
       font-weight: bold;
-      font-size: 1.05rem;
+      font-size: $base * 1.05;
     }
-    .headings td {
-      font-size: 0.9rem;
+    tr td:first-child, .headings td {
+      font-size: $base * .9;
       font-weight: normal;
       text-align: center;
     }
@@ -149,7 +154,7 @@
     font-size: $small;
 
     &.smaller {
-      font-size: $small * 0.8;
+      font-size: $small * 0.7;
     }
 
     & + * {

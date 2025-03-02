@@ -89,10 +89,10 @@ function formatDate(date) {
 const callGeneratePDF = async () => {
   showLoader.value = true;
 
-  const doc = new jsPDF('portrait', 'pt', 'a4', true);
+  const doc = new jsPDF('portrait', 'px', 'a4', true, true, 10);
   var width = doc.internal.pageSize.getWidth();
 
-  console.log(width);
+  console.log(doc.getFontList());
 
   // Capture the HTML content from the template and generate a PDF
   doc.html(pdfContent.value, {
@@ -133,8 +133,7 @@ const callGeneratePDF = async () => {
           <div id="companyInformation">
             <div id="companyName">{{ companyData.companyName }}</div>
             <div id="cnpj">{{ companyData.cnpj }}</div>
-            <div id="telefone"><b>{{ companyData.telefone }}</b> <i
-                :class="companyData.isWhatsApp ? 'bi-whatsapp' : ''"></i></div>
+            <div id="telefone"><b>{{ companyData.telefone }}</b> <img v-if="companyData.isWhatsApp" src="/whatsapp.png"></div>
             <div id="address">{{ companyData.address }}</div>
           </div>
           <div class="d-flex flex-column align-items-center">
@@ -206,7 +205,7 @@ const callGeneratePDF = async () => {
             </tr>
 
             <tr>
-              <td colspan="4" class="fw-bold text-center" style="font-size: 1.1rem">
+              <td colspan="4" class="fw-bold text-center" style="font-size: 17.6px">
                 RESPONSABLE
               </td>
             </tr>
@@ -241,11 +240,19 @@ const callGeneratePDF = async () => {
           </table>
           <table id="footerTable">
             <tr>
-              <td style="width: 500px">Firma y sello Responsable del transporte</td>
+              <td style="width: 400px">Firma y sello Responsable del transporte</td>
               <td>Operador</td>
               <td>Firma y aclaración<br>INSPECTOR</td>
               <td>SELLO DE<br>CONTROL</td>
-              <td rowspan="2" class="vertical-text" style="border-top: solid 3px black;">ENTRADA</td>
+              <td rowspan="2" class="vertical-text" style="border-top: solid 3px black;">
+                E<br>
+                N<br>
+                T<br>
+                R<br>
+                A<br>
+                D<br>
+                A<br>
+              </td>
             </tr>
             <tr class="empty">
               <td></td>
@@ -258,7 +265,14 @@ const callGeneratePDF = async () => {
               <td>Operador</td>
               <td>Firma y aclaración<br>INSPECTOR</td>
               <td>SELLO DE<br>CONTROL</td>
-              <td rowspan="2" class="vertical-text">SALIDA</td>
+              <td rowspan="2" class="vertical-text">
+                S<br>
+                A<br>
+                L<br>
+                I<br>
+                D<br>
+                A<br>
+              </td>
             </tr>
             <tr class="empty">
               <td></td>

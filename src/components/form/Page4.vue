@@ -23,7 +23,7 @@ const emit = defineEmits(["continue", "back"]);
 
 
     <div class="d-flex align-items-center gap-3">
-      <button @click="emit('continue')" type="button" class="btn btn-primary">Gerar PDF</button>
+      <button @click="emit('continue')" type="button" class="btn btn-primary"><i class="bi-download me-1"></i> Baixar PDF</button>
       <button @click="emit('back')" type="button" class="btn">Voltar</button>
     </div>
   <!-- </div> -->
