@@ -1,0 +1,99 @@
+@import "pdf.scss";
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.form-text {
+  font-size: 0.8rem;
+}
+
+.container {
+  position: relative;
+  width: 540px;
+  max-width: 100%;
+  /* font-size: 3rem; */
+}
+
+.form-fieldset {
+  border-left: 1px solid #ccc;
+  padding: 0 0 0.25rem 1rem;
+}
+
+.fixed-options {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(#1f00a900, #2600d124);
+  backdrop-filter: blur(6px);
+  border-top: solid 2px #2600d1;
+  z-index: 100;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem 2rem;
+  display: inline-flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#logoutBtn {
+  font-size: 0.7rem;
+}
+
+.little-action {
+  display: inline-block;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
+  color: #666;
+  font-weight: normal;
+
+  &::before {
+    vertical-align: -0.125em;
+    font-family: "bootstrap-icons";
+    content: "\F12F";
+    margin-right: 0.25rem;
+  }
+}
+
+.wide-table {
+  margin: 0;
+  display: flex;
+  max-width: 100vw;
+  margin-left: calc((100vw - 550px) / -2);
+  margin-right: calc((100vw - 550px) / -2);
+
+  @media all and (max-width: 1000px) {
+    margin-left: calc((100vw - 600px) / -2);
+    margin-right: calc((100vw - 600px) / -2);
+    // padding: 0 0.25rem;
+  }
+
+  @media all and (max-width: 550px) {
+    margin: 0 -0.75rem 0 -0.25rem;
+    // padding: 0 0.25rem;
+  }
+
+  .table-responsive {
+    margin: auto;
+  }
+}

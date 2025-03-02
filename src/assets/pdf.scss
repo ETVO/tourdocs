@@ -1,0 +1,159 @@
+#pdfcontentwrapper {
+  $width: 1000px;
+  $marginCalc: calc((100vw - 500px) / -3);
+
+  margin-top: 2rem;
+  padding: 16pt 16pt;
+  border: solid 1px red;
+  width: $width !important;
+  // margin-left: -500px;
+  margin-left: $marginCalc;
+  margin-right: $marginCalc;
+}
+
+#pdfcontent {
+  // transform: scale(.9);
+  $small: 0.8rem;
+  $base: 1rem;
+  $medium: 1rem;
+
+
+  #header {
+    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+    border: solid 3px black;
+    justify-content: stretch;
+    #logo {
+      flex: 0 0 125px;
+      img {
+        width: 125px;
+        height: 150px;
+        object-fit: contain;
+      }
+    }
+
+    #companyInformation {
+      width: 40%;
+      #companyName {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      #cnpj {
+        font-size: $base;
+      }
+      #telefone {
+        margin: 0.5rem 0;
+        font-size: 1.05rem;
+      }
+      #address {
+        font-size: $base;
+        line-height: 1.25;
+        white-space: pre-line;
+      }
+    }
+
+    #sheetNumber {
+      margin: auto;
+      display: inline-flex;
+      min-width: 125px;
+      border: solid 3px;
+      padding: 0.25rem 0.5rem;
+      gap: 0.5rem;
+      align-items: baseline;
+      justify-content: flex-start;
+      font-weight: bold;
+    }
+  }
+
+  #mainTitle {
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+    border: solid 3px black;
+    border-top: none; border-bottom-width: 2px;
+  }
+
+  #tripInformation {
+    table {
+      width: 100%;
+      border: solid 3px black;
+      border-top: none; border-bottom-width: 2px;
+      td {
+        padding: 0.25rem 0.5rem;
+        border: solid 1px black;
+        font-weight: bold;
+        small {
+          font-weight: normal;
+        }
+      }
+
+      #arrow {
+        width: 40px;
+      }
+
+      .vertical-text {
+        padding: 0.25rem;
+        font-size: 0.6rem;
+        font-weight: normal;
+        width: 25px;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+
+      }
+    }
+  }
+  #passengersTable {
+    tr td:first-child {
+      font-size: 0.9rem;
+    }
+    td {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.05rem;
+    }
+    .headings td {
+      font-size: 0.9rem;
+      font-weight: normal;
+      text-align: center;
+    }
+  }
+
+  #footerTable { 
+    border-bottom-width: 3px;
+    td {
+      font-size: 0.95rem;
+      text-align: center;
+      font-weight: normal !important;
+      &:nth-child(4) {
+        width: 130px;
+        text-align: right;
+        border-right: solid 3px black;
+      }
+    }
+
+    tr.empty td {
+      height: 50px;
+    }
+  }
+
+  table:not(#footerTable), #header, #mainTitle {
+    width: calc(100% - 25px);
+  }
+
+  .usoOficial {
+    background-color: #ddd;
+    width: 130px;
+  }
+
+  small {
+    color: #333;
+    font-size: $small;
+
+    &.smaller {
+      font-size: $small * 0.8;
+    }
+
+    & + * {
+      color: red;
+    }
+  }
+}
