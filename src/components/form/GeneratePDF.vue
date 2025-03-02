@@ -16,23 +16,23 @@ const showLoader = ref(false);
 const companyData = reactive({});
 
 const tripInformation = reactive({
-  sheetNumber: 50,
-  transportMode: "Ônibus",
-  licensePlate: "ABC-1234",
-  licenseCountry: "Brasil",
-  leftFromCountry: "Argentina",
-  enteredViaCountry: "Brasil",
-  date: "2024-03-01",
-  border: "Fronteira Sul",
-  crewAmount: 2,
-  passengersAmount: 4,
-  driver: "João Silva",
-  coordinator: "Maria Oliveira",
+  sheetNumber: 0,
+  transportMode: "",
+  licensePlate: "",
+  licenseCountry: "",
+  leftFromCountry: "",
+  enteredViaCountry: "",
+  date: "",
+  border: "",
+  crewAmount: 0,
+  passengersAmount: 0,
+  driver: "",
+  coordinator: "",
 });
 
 const passengers = ref([]);
 
-const page = ref(3);
+const page = ref(1);
 
 const pdfContent = ref(null);
 
@@ -47,7 +47,7 @@ const fetchCompanyData = async () => {
 
     // Get logo aspect ratio to display correctly
     await getAspectRatio(companyData.logo).then((aspectRatio) => {
-      logoW.value = 125;
+      logoW.value = 110;
       logoH.value = logoW.value / aspectRatio;
       if (logoH.value > 150) {
         logoH.value = 150;
@@ -61,13 +61,29 @@ const fetchCompanyData = async () => {
 }
 
 // Check IndexedDB for saved data
-onMounted(fetchCompanyData);
+onMounted(() => {
+  fetchCompanyData();
+  const storedTripInformation = localStorage.getItem('tripInformation');
+  console.log(storedTripInformation);
+  if (storedTripInformation) {
+    Object.assign(tripInformation, JSON.parse(storedTripInformation));
+  }
+});
 
 const updateTripInformation = (newTripInformation) => {
   if (tripInformation.passengersAmount !== newTripInformation.passengersAmount) {
     passengers.value = [];
+
   }
   Object.assign(tripInformation, newTripInformation);
+  localStorage.setItem('tripInformation', JSON.stringify({
+    transportMode: tripInformation.transportMode,
+    licensePlate: tripInformation.licensePlate,
+    licenseCountry: tripInformation.licenseCountry,
+    crewAmount: tripInformation.crewAmount,
+    driver: tripInformation.driver,
+    coordinator: tripInformation.coordinator,
+  }));
   page.value++;
 }
 
@@ -126,28 +142,31 @@ const callGeneratePDF = async () => {
     <Page4 @back="page--" @continue="callGeneratePDF" />
     <div id="pdfcontentwrapper" class="pt-5">
       <div ref="pdfContent" id="pdfcontent">
-        <div id="header" class="d-flex gap-2">
+        <div id="header" class="d-flex gap-1">
           <div id="logo">
-            <img :src="companyData.logo">
+            <img :src="companyData.logo" :width="logoW" :height="logoH">
           </div>
           <div id="companyInformation">
             <div id="companyName">{{ companyData.companyName }}</div>
             <div id="cnpj">{{ companyData.cnpj }}</div>
-            <div id="telefone"><b>{{ companyData.telefone }}</b> <img v-if="companyData.isWhatsApp" src="/whatsapp.png"></div>
+            <div id="telefone"><b>{{ companyData.telefone }}</b> <img v-if="companyData.isWhatsApp" src="/whatsapp.png">
+            </div>
             <div id="address">{{ companyData.address }}</div>
           </div>
           <div class="d-flex flex-column align-items-center">
             <div class="d-flex gap-4">
               <img src="/T.png" alt="" width="50" height="50">
-              <div style="text-align: center">
-                <b style="display: block;">
-                  MINISTERIO DEL INTERIOR<br>DIRECCIÓN NACIONAL DE MIGRACIONES
-                </b>
-                <span>ANEXO II Resolución 2997/85</span>
+                <div style="text-align: center">
+                  <b style="display: block;">
+                    MINISTERIO DEL INTERIOR<br>DIRECCIÓN NACIONAL DE MIGRACIONES
+                  </b>
+                  <span>ANEXO II Resolución 2997/85</span>
+                  <br>
+                  <br>
+                  <div id="sheetNumber">
+                    <small>HOJA Nº:</small> {{ tripInformation.sheetNumber }}
+                  </div>
               </div>
-            </div>
-            <div id="sheetNumber">
-              <small>HOJA Nº:</small> {{ tripInformation.sheetNumber }}
             </div>
           </div>
         </div>
@@ -215,7 +234,7 @@ const callGeneratePDF = async () => {
               <td class="text-center"><small class="smaller">Certificacion Migratoria</small></td>
             </tr>
             <tr>
-              <td colspan="4"><small>COORDENADOR:</small> {{ tripInformation.coordinator }}</td>
+              <td colspan="4"><small>COORDENADOR:</small> {{ tripInformation.coordinator !== '' ? tripInformation.coordinator : tripInformation.driver }}</td>
               <td></td>
             </tr>
           </table>

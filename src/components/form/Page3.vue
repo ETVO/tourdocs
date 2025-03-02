@@ -21,11 +21,11 @@ const removePassenger = (index, surpassConfirm) => {
 
 const addPassenger = () => {
   passengers.value.push({
-    fullName: 'John Doe',
-    birthDate: '1990-01-01',
-    nationality: 'American',
-    idType: 'Passport',
-    idNumber: 'A123456789'
+    fullName: '',
+    birthDate: '',
+    nationality: '',
+    idType: '',
+    idNumber: ''
   });
 };
 
@@ -100,7 +100,7 @@ const handleSubmit = (e) => {
                 </div>
               </td>
               <td title="Remover passageiro">
-                <button class="bi-person-dash text-danger btn" @click="removePassenger(i)"></button>
+                <button @click="removePassenger(i)" type="button" class="bi-person-dash text-danger btn"></button>
               </td>
             </tr>
             <tr class="table-light" style="cursor: pointer; user-select: none;" @dblclick="addPassenger"

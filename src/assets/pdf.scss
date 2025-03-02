@@ -9,6 +9,8 @@
   // margin-left: -500px;
   margin-left: $marginCalc;
   margin-right: $marginCalc;
+
+  display: none;
 }
 
 #pdfcontent {
@@ -27,12 +29,8 @@
     border: solid 3px black;
     justify-content: stretch;
     #logo {
-      flex: 0 0 125px;
-      img {
-        width: 125px;
-        height: 150px;
-        object-fit: contain;
-      }
+      flex: 0 0 120px;
+      padding: 0 0 10px 10px;
     }
 
     #companyInformation {

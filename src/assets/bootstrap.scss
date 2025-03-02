@@ -1,7 +1,8 @@
-$primary: #0a0059;
+$primary: #0a0059;;
 
-// $input-btn-font-size: .9rem;
-
-// $font-size-base: .9rem;
+$btn-padding-y:               .5rem;
+$btn-padding-x:               1.25rem;
+$btn-border-radius:           0;
+$btn-border-width:           2px;
 
 @import "bootstrap/scss/bootstrap";

@@ -26,9 +26,8 @@ const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
   }
-  // TODO add else back
-  form.classList.add('was-validated');
-  emit('continue', {
+  else {
+    emit('continue', {
     sheetNumber: sheetNumber.value,
     transportMode: transportMode.value,
     licensePlate: licensePlate.value,
@@ -42,12 +41,15 @@ const handleSubmit = (e) => {
     driver: driver.value,
     coordinator: coordinator.value
   })
+  }
+  // TODO add else back
+  form.classList.add('was-validated');
 };
 
 </script>
 
 <template>
-  <p class="lead"><b>1.</b> Por favor, preencha as informações da viagem:</p>
+  <p class="lead"><b>1.</b> Por favor, preencha os dados da viagem:</p>
   <form @submit.prevent="handleSubmit" novalidate>
     <div class="form-floating mb-3">
       <input class="form-control" type="text" v-model="sheetNumber" name="sheetNumber" placeholder="Folha Nº"
@@ -92,25 +94,27 @@ const handleSubmit = (e) => {
       <label class="form-label" for="border">Passagem de Fronteira</label>
     </div>
 
-    <div class="row mb-2 g-3">
+    <div class="row mb-3 g-3">
       <div class="col">
         <div class="form-floating">
           <input class="form-control" type="number" v-model="crewAmount" name="crewAmount"
-            placeholder="Nº de Tripulantes" min="1" required />
+            placeholder="Nº de Tripulantes" min="1" step="1" required />
           <label class="form-label" for="crewAmount">Nº de Tripulantes</label>
+          <div class="invalid-feedback">O número mínimo de tripulantes é 1.</div>
         </div>
       </div>
       <div class="col">
-        <div class="form-floating mb-3">
+        <div class="form-floating">
           <input class="form-control" type="number" v-model="passengersAmount" name="passengersAmount"
-            placeholder="Nº de Passageiros" min="1" required />
+            placeholder="Nº de Passageiros" min="1" max="12" step="1" required />
           <label class="form-label" for="passengersAmount">Nº de Passageiros</label>
+          <div class="invalid-feedback">O número deve estar entre 1 e 12.</div>
         </div>
       </div>
     </div>
 
-    <div class="form-fieldset mb-3">
-      <h4 class="form-fieldset-text">Responsável</h4>
+    <div class="mb-4">
+      <h4 class="special-in">Responsável</h4>
       <div class="form-floating mb-2">
         <input class="form-control" type="text" v-model="driver" name="driver" placeholder="Condutor" required />
         <label class="form-label" for="driver">Condutor</label>
@@ -119,8 +123,7 @@ const handleSubmit = (e) => {
       <div class="form-floating">
         <input class="form-control" type="text" v-model="coordinator" name="coordinator" placeholder="Coordenador" />
         <label class="form-label" for="coordinator">Coordenador</label>
-        <div class="invalid-feedback">Please provide the coordinator's name.</div>
-        <small class="form-text">(If left blank, the driver’s name will be used.)</small>
+        <small class="form-text">(Caso fique em branco, será utilizado o nome do Condutor)</small>
       </div>
     </div>
 
